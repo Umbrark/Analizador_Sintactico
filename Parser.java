@@ -293,10 +293,10 @@ public class Parser
     {
         if(hayErrores) return;
 
-        if(preanalisis.equals(ademas));
+        if(preanalisis.equals(ademas))
         {
             coincidir(ademas);
-            STATEMENT();
+            STATEMENT(); 
         }
     }
 
