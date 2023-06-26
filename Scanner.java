@@ -38,9 +38,6 @@ public class Scanner
         palabrasReservadas.put("verdadero", TipoToken.VERDADERO);
         palabrasReservadas.put("var", TipoToken.VAR); //definir variables
         palabrasReservadas.put("mientras", TipoToken.MIENTRAS);
-        palabrasReservadas.put("select", TipoToken.SELECT);
-        palabrasReservadas.put("from", TipoToken.FROM);
-        palabrasReservadas.put("distinct", TipoToken.DISTINCT);
     }
 
 
@@ -69,43 +66,43 @@ public class Scanner
 
                     if (Caracter=='(')
                     {
-                        tokens.add(new Token(TipoToken.ABRIR_PARENTESIS, "(", Posicion + 1));
+                        tokens.add(new Token(TipoToken.ABRIR_PARENTESIS, "("));
                     }
                     else if(Caracter==')')
                     {
-                        tokens.add(new Token(TipoToken.CERRAR_PARENTESIS, ")", Posicion + 1));
+                        tokens.add(new Token(TipoToken.CERRAR_PARENTESIS, ")"));
                     }
                     else if(Caracter=='{')
                     {
-                        tokens.add(new Token(TipoToken.ABRIR_LLAVE, "{", Posicion + 1));
+                        tokens.add(new Token(TipoToken.ABRIR_LLAVE, "{"));
                     }
                     else if(Caracter=='}')
                     {
-                        tokens.add(new Token(TipoToken.CERRAR_LLAVE, "}", Posicion + 1));
+                        tokens.add(new Token(TipoToken.CERRAR_LLAVE, "}"));
                     }
                     else if(Caracter==',')
                     {
-                        tokens.add(new Token(TipoToken.COMA, ",", Posicion + 1));
+                        tokens.add(new Token(TipoToken.COMA, ","));
                     }
                     else if(Caracter=='.')
                     {
-                        tokens.add(new Token(TipoToken.PUNTO, ".", Posicion + 1));
+                        tokens.add(new Token(TipoToken.PUNTO, "."));
                     }
                     else if(Caracter==';')
                     {
-                        tokens.add(new Token(TipoToken.PUNTO_Y_COMA, ";", Posicion + 1));
+                        tokens.add(new Token(TipoToken.PUNTO_Y_COMA, ";"));
                     }
                     else if(Caracter=='-')
                     {
-                        tokens.add(new Token(TipoToken.RESTA, "-", Posicion + 1));
+                        tokens.add(new Token(TipoToken.RESTA, "-"));
                     }
                     else if(Caracter=='+')
                     {
-                        tokens.add(new Token(TipoToken.SUMA, "+", Posicion + 1));
+                        tokens.add(new Token(TipoToken.SUMA, "+"));
                     }
                     else if(Caracter=='*')
                     {
-                        tokens.add(new Token(TipoToken.ASTERISCO, "*", Posicion + 1));
+                        tokens.add(new Token(TipoToken.ASTERISCO, "*"));
                     }
                     else if(Caracter=='/')
                     {
@@ -134,6 +131,7 @@ public class Scanner
                     else if(Character.isDigit(Caracter))
                     {
                         Estado = 10;
+                        lexema = lexema + Caracter;
                     }
                     else if(Character.isAlphabetic(Caracter))
                     {
@@ -156,7 +154,7 @@ public class Scanner
                     else
                     {
                         Posicion--;
-                        tokens.add(new Token(TipoToken.ENTRE, "/", Posicion + 1));
+                        tokens.add(new Token(TipoToken.ENTRE, "/"));
                         Estado = 0;
                     }
                     
@@ -165,12 +163,12 @@ public class Scanner
 
                     if (Caracter=='=')
                     {
-                        tokens.add(new Token(TipoToken.DIFERENTE_DE, "!=", Posicion + 1));
+                        tokens.add(new Token(TipoToken.DIFERENTE_DE, "!="));
                     }
                     else
                     {
                         Posicion--;
-                        tokens.add(new Token(TipoToken.DIFERENTE, "!", Posicion + 1));
+                        tokens.add(new Token(TipoToken.DIFERENTE, "!"));
                     }
 
                     Estado = 0;
@@ -181,12 +179,12 @@ public class Scanner
 
                     if(Caracter=='=')
                     {
-                        tokens.add(new Token(TipoToken.IGUAL, "==", Posicion + 1));
+                        tokens.add(new Token(TipoToken.IGUAL, "=="));
                     }   
                     else
                     {
                         Posicion--;
-                        tokens.add(new Token(TipoToken.ASIGNACION, "=", Posicion + 1));
+                        tokens.add(new Token(TipoToken.ASIGNACION, "="));
                     } 
 
                     Estado = 0;
@@ -197,12 +195,12 @@ public class Scanner
 
                     if (Caracter=='=')
                     {
-                        tokens.add(new Token(TipoToken.MENOR_IGUAL_QUE, "<=", Posicion + 1));
+                        tokens.add(new Token(TipoToken.MENOR_IGUAL_QUE, "<="));
                     }
                     else
                     {
                         Posicion--;
-                        tokens.add(new Token(TipoToken.MENOR_QUE, "<", Posicion + 1));
+                        tokens.add(new Token(TipoToken.MENOR_QUE, "<"));
                     }
 
                     Estado = 0;
@@ -213,12 +211,12 @@ public class Scanner
 
                     if (Caracter=='=')
                     {
-                        tokens.add(new Token(TipoToken.MAYOR_IGUAL_QUE,">=", Posicion + 1));
+                        tokens.add(new Token(TipoToken.MAYOR_IGUAL_QUE,">="));
                     }
                     else
                     {
                         Posicion--;
-                        tokens.add(new Token(TipoToken.MAYOR_QUE, ">", Posicion + 1));
+                        tokens.add(new Token(TipoToken.MAYOR_QUE, ">"));
                     }
 
                     Estado = 0;
@@ -259,7 +257,7 @@ public class Scanner
                     }
                     else
                     {
-                        Estado = 8;
+                        Estado = 7;
                     }
 
                 break;
@@ -268,13 +266,15 @@ public class Scanner
 
                 if(Caracter == '"')
                 {
-                    tokens.add(new Token(TipoToken.CADENA,"CADENA", Posicion + 1));
+                    tokens.add(new Token(TipoToken.CADENA,lexema));
 
+                    lexema ="";
                     Estado = 0;
                 }
                 else
                 {
                     Estado = 9;
+                    lexema = lexema + Caracter;
                 }
 
 
@@ -285,19 +285,23 @@ public class Scanner
                 if(Character.isDigit(Caracter))
                 {
                     Estado = 10;
+                    lexema = lexema + Caracter;
                 }                
                 else if(Caracter == '.')
                 {
                     Estado = 11;
+                    lexema = lexema + Caracter;
                 }
                 else if(Caracter == 'E')
                 {
                     Estado = 13;
+                    lexema = lexema + Caracter;
                 }
                 else
                 {
                     Posicion--;
-                    tokens.add(new Token(TipoToken.NUMERO,"NUMERO",Posicion + 1));
+                    tokens.add(new Token(TipoToken.NUMERO,lexema,Double.valueOf(lexema)));
+                    lexema="";
 
                     Estado = 0;
                 }
@@ -308,6 +312,7 @@ public class Scanner
                 if(Character.isDigit(Caracter))
                 {
                     Estado = 12;
+                    lexema = lexema + Caracter;
                 }
             break;
 
@@ -315,16 +320,18 @@ public class Scanner
                 if(Character.isDigit(Caracter))
                 {
                     Estado = 12;
+                    lexema = lexema + Caracter;
                 }
                 else if(Caracter == 'E')
                 {
                     Estado = 13;
+                    lexema = lexema + Caracter;
                 }
                 else
                 {
                     Posicion--;
-                    tokens.add(new Token(TipoToken.NUMERO,"NUMERO",Posicion + 1));
-
+                    tokens.add(new Token(TipoToken.NUMERO,lexema,Double.valueOf(lexema)));
+                    lexema ="";
                     Estado = 0;
                 }
             break;
@@ -333,10 +340,12 @@ public class Scanner
                 if(Caracter == '+' || Caracter == '-')
                 {
                     Estado = 14;
+                    lexema = lexema + Caracter;
                 }
                 else if(Character.isDigit(Caracter))
                 {
                     Estado = 15;
+                    lexema = lexema + Caracter;
                 }
             break;
 
@@ -344,6 +353,7 @@ public class Scanner
                 if(Character.isDigit(Caracter))
                 {
                     Estado = 15;
+                    lexema = lexema + Caracter;
                 }
             break;
 
@@ -351,11 +361,13 @@ public class Scanner
                 if(Character.isDigit(Caracter))
                 {
                     Estado = 15;
+                    lexema = lexema + Caracter;
                 }
                 else
                 {
                     Posicion--;
-                    tokens.add(new Token(TipoToken.NUMERO,"NUMERO", Posicion + 1));
+                    tokens.add(new Token(TipoToken.NUMERO,lexema,Double.valueOf(lexema)));
+                    lexema = "";
 
                     Estado = 0;
                 }
@@ -372,11 +384,11 @@ public class Scanner
                     TipoToken tt = palabrasReservadas.get(lexema);
                     if(tt == null)
                     {
-                        tokens.add(new Token(TipoToken.IDENTIFICADOR, lexema, inicioLexema + 1));
+                        tokens.add(new Token(TipoToken.IDENTIFICADOR, lexema));
                     }
                     else
                     {
-                        tokens.add(new Token(tt, lexema ,inicioLexema + 1));
+                        tokens.add(new Token(tt, lexema));
                     }
 
                     Estado = 0;
@@ -395,7 +407,7 @@ public class Scanner
         Analizar el texto de entrada para extraer todos los tokens
         y al final agregar el token de fin de archivo
          */
-        tokens.add(new Token(TipoToken.EOF,"", source.length()));
+        tokens.add(new Token(TipoToken.EOF,""));
     
         return tokens;
     }

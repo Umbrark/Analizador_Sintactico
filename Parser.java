@@ -18,20 +18,20 @@ public class Parser
     private final Token y = new Token(TipoToken.Y, "y");
     private final Token fun = new Token(TipoToken.FUN, "fun");
     private final Token var = new Token(TipoToken.VAR, "var");
-    private final Token ademas = new Token(TipoToken.ADEMAS, "ademas");
+    private final Token ademas = new Token(TipoToken.ADEMAS, "else");
     private final Token falso = new Token(TipoToken.FALSO, "falso");
     private final Token para = new Token(TipoToken.PARA, "para");
-    private final Token si = new Token(TipoToken.SI, "si");
+    private final Token si = new Token(TipoToken.SI, "if");
     private final Token nulo = new Token(TipoToken.NULO, "nulo");
     private final Token o = new Token(TipoToken.O, "o");
-    private final Token imprimir = new Token(TipoToken.IMPRIMIR, "imprimir");
+    private final Token imprimir = new Token(TipoToken.IMPRIMIR, "print");
     private final Token retornar = new Token(TipoToken.RETORNAR, "retornar");
     private final Token superr = new Token(TipoToken.SUPER, "superr");
     private final Token este = new Token(TipoToken.ESTE, "este");
     private final Token verdadero = new Token(TipoToken.VERDADERO, "verdadero");
     private final Token mientras = new Token(TipoToken.MIENTRAS, "mientras");
-    private final Token cadena = new Token(TipoToken.CADENA, "cadena");
-    private final Token numero = new Token(TipoToken.NUMERO, "numero");
+    private final Token cadena = new Token(TipoToken.CADENA, "");
+    private final Token numero = new Token(TipoToken.NUMERO, "");
     private final Token abrir_parentesis = new Token(TipoToken.ABRIR_PARENTESIS, "(");
     private final Token cerrar_parentesis = new Token(TipoToken.CERRAR_PARENTESIS, ")");
     private final Token abrir_llave = new Token(TipoToken.ABRIR_LLAVE, "{");
@@ -59,7 +59,7 @@ public class Parser
         this.tokens = tokens;
     }
 
-    public void parse()
+    public boolean parse()
     {
         i = 0;
         preanalisis = tokens.get(i);
@@ -67,12 +67,18 @@ public class Parser
 
         if(!hayErrores && !preanalisis.equals(finCadena))
         {
-            System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
+            //System.out.println("Error en la posición " + preanalisis.posicion + ". No se esperaba el token " + preanalisis.tipo);
+            System.out.println("Error. No se esperaba el token " + preanalisis.tipo);
+
+            return false;
         }
         else if(!hayErrores && preanalisis.equals(finCadena))
         {
-            System.out.println("Consulta válida");
+            //System.out.println("Codigo Correcto");
+
+            return true;
         }
+        return hayErrores;
     }
 
     void DECLARATION()
@@ -193,7 +199,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion);
+            //System.out.println("Error en la posición " + preanalisis.posicion);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 
@@ -239,7 +247,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion);
+            //System.out.println("Error en la posición " + preanalisis.posicion);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 
@@ -261,7 +271,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion);
+            //System.out.println("Error en la posición " + preanalisis.posicion);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 
@@ -572,7 +584,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion);
+            //System.out.println("Error en la posición " + preanalisis.posicion);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 
@@ -663,7 +677,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion);
+            //System.out.println("Error en la posición " + preanalisis.posicion);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 
@@ -763,8 +779,9 @@ public class Parser
         else
         {
             hayErrores = true;
-            System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un  " + t.tipo);
-
+            //System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un  " + t.tipo);
+            System.out.println("Error semantico");
+            System.exit(1);
         }
     }
 

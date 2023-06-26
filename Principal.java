@@ -3,6 +3,9 @@ package mx.ipn.escom.compiladores;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Principal {
@@ -10,7 +13,25 @@ public class Principal {
     static boolean existenErrores = false;
 
     public static void main(String[] args) throws IOException {
+        if(args.length > 1) {
+            System.out.println("Uso correcto: interprete [script]");
+
+            // Convención defininida en el archivo "system.h" de UNIX
+            System.exit(64);
+        } else if(args.length == 1){
+            ejecutarArchivo(args[0]);
+        } else{
+            ejecutarPrompt();
+        }
         ejecutarPrompt();
+    }
+
+    private static void ejecutarArchivo(String path) throws IOException {
+        byte[] bytes = Files.readAllBytes(Paths.get(path));
+        ejecutar(new String(bytes, Charset.defaultCharset()));
+
+        // Se indica que existe un error
+        if(existenErrores) System.exit(65);
     }
 
     private static void ejecutarPrompt() throws IOException{
@@ -34,8 +55,26 @@ public class Principal {
             System.out.println(token);
         }*/
 
+        // Para este ejemplo no vamos a utilizar un parser
         Parser parser = new Parser(tokens);
-        parser.parse();
+        boolean psr = parser.parse();
+
+        TablaSimbolos tablita = new TablaSimbolos();
+
+        //boolean psr = parser.parse();
+        if (psr == true)
+        {
+            GeneradorPostfija gpf = new GeneradorPostfija(tokens);
+            List<Token> postfija = gpf.convertir();
+
+        /*for(Token token : postfija){
+            System.out.println(token);
+        }*/
+
+            GeneradorAST gast = new GeneradorAST(postfija);
+            Arbol programa = gast.generarAST();
+            programa.recorrer();
+        }
     }
 
     /*

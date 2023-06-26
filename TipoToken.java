@@ -6,8 +6,6 @@ public enum TipoToken {
 
     CADENA, NUMERO, IDENTIFICADOR,
 
-    SELECT, DISTINCT, FROM,
-
     // Palabras clave:
     Y, 
     CLASE, 
