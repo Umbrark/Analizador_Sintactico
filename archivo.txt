@@ -1,0 +1,61 @@
+// Prueba 1:
+/*var nombre = "Gabriel";
+var apellido = "Rodriguez";
+
+imprimir nombre + " " + apellido;*/
+
+
+// Prueba 2:
+/*var nombre = "Gabriel";
+var apellido = "Rodriguez";
+
+imprimir nombre + " " + apellido +  edad;*/
+
+
+// Prueba 3:
+/*var radio = 5;
+var area = pi*radio *radio;
+
+imprimir "El area es: ";
+imprimir area;*/
+
+// Prueba 4:
+/*var radio = 5;
+var pi = "3.1416";
+var area = pi*radio *radio;
+
+imprimir "El area es: ";
+imprimir area;*/
+
+
+// Prueba 5:
+/*var radio = 5;
+var pi = 3.1416;
+var area = pi*radio *radio;
+
+imprimir "El area es: ";
+imprimir area;*/
+
+
+// Prueba 6:
+/*var radio = 5;
+var pi = 3.1416;
+var area = pi*radio *radio;
+
+si(area > 100 y radio<10){
+    imprimir "Condicion válida";
+}*/
+
+
+// Prueba 7:
+/*var radio = 5;
+var pi = 3.1416;
+var area = pi*radio *radio;
+
+si(area > 100 y radio<10){
+    imprimir "Condicion válida";
+}
+ademas{
+    imprimir "No se cumple el criterio";
+}*/
+

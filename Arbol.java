@@ -81,7 +81,7 @@ public class Arbol {
                 break;
                 case SI:
                     Nodo VerHijos1 = n.getHijos().get(0);
-                    int ELSE = VerHijos1.getHijos().size();
+                    int ELSE = n.getHijos().size()-1;
 
                     if(VerHijos1.getHijos().size() == 1)
                     {
@@ -94,7 +94,7 @@ public class Arbol {
 
                     if (ConCumIf)
                     {
-                        for (int a = 1; a <= n.getHijos().size() - 1; a++)
+                        for (int a = 0; a <= n.getHijos().size() - 1; a++)
                         {
 
                             if(n.getHijos().get(a).getValue().tipo == TipoToken.ADEMAS)

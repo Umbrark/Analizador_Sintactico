@@ -29,7 +29,8 @@ public class SolverAritmetico {
                 }
                 else
                 {
-                    System.out.println("La variable tiene valor nulo");
+                    System.out.println("La variable " +  n.getValue().lexema + " no existe");
+                    System.exit(1);
                 }
             }
             else if (n.getValue().tipo == TipoToken.FALSO)
@@ -79,13 +80,36 @@ public class SolverAritmetico {
 
             }
         }
-        else if(resultadoIzquierdo instanceof String && resultadoDerecho instanceof String){
-            if (n.getValue().tipo == TipoToken.SUMA){
+        else if(resultadoIzquierdo instanceof String && resultadoDerecho instanceof String)
+        {
+            if (n.getValue().tipo == TipoToken.SUMA)
+            {
                 // Ejecutar la concatenación
+
+                return (String) resultadoIzquierdo + resultadoDerecho;
+            }
+            else
+            {
+                System.out.println("Error. Solo se permite suma para las cadenas");
+                System.exit(1);
+            }
+
+        }
+        else if (resultadoIzquierdo instanceof Boolean && resultadoDerecho instanceof Boolean)
+        {
+            switch (n.getValue().tipo)
+            {
+                case Y:
+                    return ((Boolean) resultadoIzquierdo && (Boolean) resultadoDerecho);
+                case O:
+                    return ((Boolean) resultadoIzquierdo || (Boolean) resultadoDerecho);
             }
         }
-        else{
+        else
+        {
             // Error por diferencia de tipos
+            System.out.println("Error, no se puede realizar operaciones con variables de diferente tipo");
+            System.exit(1);
         }
 
         return null;

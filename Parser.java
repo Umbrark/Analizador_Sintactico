@@ -200,7 +200,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }
@@ -248,7 +248,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }
@@ -272,7 +272,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }
@@ -585,7 +585,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }
@@ -678,7 +678,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }
@@ -780,7 +780,7 @@ public class Parser
         {
             hayErrores = true;
             //System.out.println("Error en la posición " + preanalisis.posicion + ". Se esperaba un  " + t.tipo);
-            System.out.println("Error semantico");
+            System.out.println("Error sintactico");
             System.exit(1);
         }
     }

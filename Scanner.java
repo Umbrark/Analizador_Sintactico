@@ -266,7 +266,7 @@ public class Scanner
 
                 if(Caracter == '"')
                 {
-                    tokens.add(new Token(TipoToken.CADENA,lexema));
+                    tokens.add(new Token(TipoToken.CADENA,lexema,lexema));
 
                     lexema ="";
                     Estado = 0;
